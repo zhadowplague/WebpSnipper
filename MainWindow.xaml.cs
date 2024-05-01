@@ -1,5 +1,6 @@
 ﻿using ABI.Windows.ApplicationModel.Activation;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +29,13 @@ namespace AnimatedImageMaker
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			if (!File.Exists(Constants.Img2WebpPath))
+			{
+				MessageBox.Show("Missing img2webp.exe");
+                System.Windows.Application.Current.Shutdown();
+                return;
+			}
 
 			_source = new();
 			_keyBoardListener = new();
