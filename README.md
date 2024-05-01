@@ -6,12 +6,14 @@ https://developers.google.com/speed/webp/download
 
 
 ##Installation & Usage
+
 Download the latest relase, unpack it to a folder and add web2img to the same folder.
 When starting the app you mark a area of the screen which you want recorded. 
 Then hit escape when you are finished or the maximum recording time has elapsed.
 
 
 ##Docs
+
 The app use System.Graphics to capture a part of the screen and store it to a png at a interval of 10 fps.
 The app uses SharpHook nuget package to hook into global escape keyboard key for stopping the recording early.
 The pnges are then passed to img2webp to create a webp.
