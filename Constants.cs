@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace AnimatedImageMaker;
 
-namespace AnimatedImageMaker
+public class Constants
 {
-	internal class Constants
-	{
-		public const int DefaultFPS = 8;
-	}
+	public const int DefaultFPS = 8;
 }
