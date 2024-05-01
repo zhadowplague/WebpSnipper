@@ -2,7 +2,7 @@
 @using AnimatedImageMaker
 @namespace AnimatedImageMaker
 
-<div class="d-flex flex-column justify-content-center align-items-center">
+<div class="d-flex flex-column justify-content-center align-items-center h-100">
 	<img @key=_imgID src="@ImageSrcPath" alt="resultImage" />
 	<span>Total frame count: @ScreenRecorder.FrameCount</span>
 	@if (Editable)
@@ -16,6 +16,8 @@
 		<div>
 			<span>Framerate</span>
 			<InputNumber @bind-Value=Framerate />
+			<span>Compression quality:</span>
+			<InputNumber @bind-Value=CompressionQuality />
 		</div>
 	}
 	else
@@ -25,6 +27,17 @@
 </div>
 
 @code {
+	private int _compressionQuality = Constants.DefaultCompressionQuality;
+	private int CompressionQuality
+	{
+		get => _compressionQuality;
+		set
+		{
+			_compressionQuality = value;
+			ReRender();
+		}
+	}
+
 	private int _fps = Constants.DefaultFPS;
 	private int Framerate
 	{
@@ -46,6 +59,7 @@
 			ReRender();
 		}
 	}
+
 	private int _endOffset;
 	private int EndOffset 
 	{
@@ -56,6 +70,7 @@
 			ReRender();
 		}
 	}
+
 	private string ImageSrcPath = "out/output.webp";
 	private string _imgID = System.Guid.NewGuid().ToString();
 	private bool Editable => _current == null || _current.IsCompleted;
@@ -71,7 +86,7 @@
 
 	async Task RunTrim()
 	{
-		await ScreenRecorder.Process(StartOffset, EndOffset, Framerate);
+		await ScreenRecorder.Process(StartOffset, EndOffset, Framerate, CompressionQuality);
 		_imgID = System.Guid.NewGuid().ToString();
 		InvokeAsync(StateHasChanged);
 	}

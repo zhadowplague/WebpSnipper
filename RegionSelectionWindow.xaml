@@ -1,0 +1,15 @@
+﻿<Window x:Class="AnimatedImageMaker.RegionSelectionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnimatedImageMaker"
+        mc:Ignorable="d" AllowsTransparency="True"
+        WindowStyle="None" Foreground="{x:Null}" Background="#02000000" BorderBrush="Red" BorderThickness="2"
+        Title="RegionSelectionWindow" Height="450" Width="800">
+    <Canvas x:Name="canvas">
+        <Border Canvas.Top="50" Canvas.Left="50" BorderBrush="Black" BorderThickness="2" x:Name="regionPos">
+            <Control Width="100" Height="100" x:Name="regionSize" />
+        </Border>
+    </Canvas>
+</Window>

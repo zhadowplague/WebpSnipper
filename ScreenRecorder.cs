@@ -37,8 +37,8 @@ public static class ScreenRecorder
 		using var bitmap = new Bitmap(width, height);
 		using var g = Graphics.FromImage(bitmap);
 		g.CopyFromScreen(x, y, 0, 0, bitmap.Size, CopyPixelOperation.SourceCopy);
-		var fileName = $"{_inPath}{Path.DirectorySeparatorChar}{_files.Count}.png";
-		bitmap.Save(fileName, ImageFormat.Png);
+		var fileName = $"{_inPath}{Path.DirectorySeparatorChar}{_files.Count}.jpg";
+		bitmap.Save(fileName, ImageFormat.Jpeg);
 		_files.Add(fileName);
 		_started = true;
 	}
@@ -54,19 +54,18 @@ public static class ScreenRecorder
 		}
 		Directory.CreateDirectory(_outPath);
 
-		await Process(0, 0, Constants.DefaultFPS);
+		await Process(0, 0, Constants.DefaultFPS, Constants.DefaultCompressionQuality);
 	} 
 
-	public static async Task Process(int startFrameOffset, int endFrameOffset, int framerate)
+	public static async Task Process(int startFrameOffset, int endFrameOffset, int framerate, int compressionQuality)
 	{
-		const string img2webpPath = "img2webp.exe";
 		var outputFileName = $"{_outPath}{Path.DirectorySeparatorChar}output.webp";
 		var msPerFrame = (int)((1.0 / framerate) * 1000);
 
-		StringBuilder arguments = new("-loop 0 ");
+		StringBuilder arguments = new("-loop 0 -mixed ");
 		foreach (var file in _files.Skip(startFrameOffset).SkipLast(endFrameOffset))
 		{
-			arguments.Append($"{file} -d {msPerFrame} ");
+			arguments.Append($"{file} -d {msPerFrame} -m {compressionQuality} ");
 		}
 		arguments.Append($"-o {outputFileName}");
 
@@ -79,7 +78,7 @@ public static class ScreenRecorder
 		// Create process start info
 		ProcessStartInfo startInfo = new()
 		{
-			FileName = img2webpPath, 
+			FileName = Constants.Img2WebpPath, 
 			Arguments = arguments.ToString(),
 			UseShellExecute = false, 
 			CreateNoWindow = true

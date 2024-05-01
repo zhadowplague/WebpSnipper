@@ -4,17 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="AnimatedImageMaker.MainWindow"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="100" Width="100" Top="0" Left="0"
-        AllowsTransparency="True"
-        WindowStyle="None"  Foreground="{x:Null}" Background="#02000000" BorderBrush="Red" BorderThickness="2">
+        mc:Ignorable="d" WindowStyle="None" ResizeMode="NoResize"
+        Title="WebpSnipper" Height="25" Width="100" Top="0" Left="0">
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo Description="Animated image maker" ProgressValue="0" ProgressState="None"/>
     </Window.TaskbarItemInfo>
-    <Canvas x:Name="canvas">
-        <ProgressBar x:Name="progressBar" Width="100" Height="10" Minimum="0" Maximum="1" Value="0"></ProgressBar>
-        <Border Canvas.Top="50" Canvas.Left="50" BorderBrush="Black" BorderThickness="2" x:Name="regionPos">
-            <Control Width="100" Height="100" x:Name="regionSize" />
-        </Border>
-    </Canvas>
+    <Grid>
+        <ProgressBar x:Name="progressBar" Width="100" Height="25" Minimum="0" Maximum="1" Value="0"></ProgressBar>
+        <Label x:Name="infoLabel" Visibility="Collapsed">Processing...</Label>
+    </Grid>
 </Window>
