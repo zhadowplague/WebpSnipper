@@ -1,0 +1,77 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+
+<div class="d-flex flex-column justify-content-center align-items-center">
+	<img @key=_imgID src="@ImageSrcPath" alt="resultImage" />
+	<span>Fps: @ScreenRecorder.FrameCount</span>
+	@if (Editable)
+	{
+		<div>
+			<span>Start offset:</span>
+			<InputNumber @bind-Value=StartOffset />
+			<span>End offset:</span>
+			<InputNumber @bind-Value=EndOffset />
+		</div>
+		<div>
+			<span>Framerate</span>
+			<InputNumber @bind-Value=Framerate />
+		</div>
+	}
+	else
+	{
+		<span>Processing...</span>
+	}
+</div>
+
+@code {
+	private int _fps = Constants.DefaultFPS;
+	private int Framerate
+	{
+		get => _fps;
+		set
+		{
+			_fps = value;
+			ReRender();
+		}
+	}
+
+	private int _startOffset;
+	private int StartOffset
+	{
+		get => _startOffset;
+		set
+		{
+			_startOffset = value;
+			ReRender();
+		}
+	}
+	private int _endOffset;
+	private int EndOffset 
+	{
+		get => _endOffset; 
+		set
+		{
+			_endOffset = value;
+			ReRender();
+		}
+	}
+	private string ImageSrcPath = "out/output.webp";
+	private string _imgID = System.Guid.NewGuid().ToString();
+	private bool Editable => _current == null || _current.IsCompleted;
+	private Task _current;
+
+	private void ReRender()
+	{
+		if (Editable)
+		{
+			_current = Task.Run(RunTrim);
+		}
+	}
+
+	async Task RunTrim()
+	{
+		await ScreenRecorder.Process(StartOffset, EndOffset, Framerate);
+		_imgID = System.Guid.NewGuid().ToString();
+		InvokeAsync(StateHasChanged);
+	}
+
+}
