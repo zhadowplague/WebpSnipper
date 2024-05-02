@@ -6,7 +6,7 @@ using Cursors = System.Windows.Input.Cursors;
 using MessageBox = System.Windows.MessageBox;
 
 
-namespace AnimatedImageMaker
+namespace WebpSnipper
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

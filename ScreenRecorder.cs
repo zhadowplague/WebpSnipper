@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
 
-namespace AnimatedImageMaker;
+namespace WebpSnipper;
 
 public static class ScreenRecorder
 {

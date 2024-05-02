@@ -1,7 +1,7 @@
 ﻿using SharpHook;
 using System.Diagnostics;
 
-namespace AnimatedImageMaker
+namespace WebpSnipper
 {
 	internal class Keyboard : IDisposable
 	{

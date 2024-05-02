@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace AnimatedImageMaker
+namespace WebpSnipper
 {
     /// <summary>
     /// Interaction logic for RegionSelectionWindow.xaml

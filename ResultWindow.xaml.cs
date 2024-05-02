@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
 
-namespace AnimatedImageMaker
+namespace WebpSnipper
 {
 	/// <summary>
 	/// Interaction logic for ResultWindow.xaml

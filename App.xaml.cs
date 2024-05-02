@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace AnimatedImageMaker
+namespace WebpSnipper
 {
 	/// <summary>
 	/// Interaction logic for App.xaml

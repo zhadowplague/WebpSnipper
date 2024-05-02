@@ -1,4 +1,4 @@
-﻿namespace AnimatedImageMaker;
+﻿namespace WebpSnipper;
 
 public static class Constants
 {
