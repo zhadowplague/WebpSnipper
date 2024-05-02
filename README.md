@@ -14,6 +14,6 @@ Then hit escape when you are finished or the maximum recording time has elapsed.
 
 ##Docs
 
-The app use System.Graphics to capture a part of the screen and store it to a png at a interval of 10 fps.
-The app uses SharpHook nuget package to hook into global escape keyboard key for stopping the recording early.
-The pnges are then passed to img2webp to create a webp.
+The app use System.Graphics to capture a part of the screen and write it to an image file at an interval of 10 fps.
+SharpHook nuget package is used to hook into global escape keyboard key for stopping the recording early.
+The image files are then passed to img2webp to create a webp.
