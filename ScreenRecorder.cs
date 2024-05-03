@@ -12,11 +12,12 @@ namespace WebpSnipper;
 
 public static class ScreenRecorder
 {
-	private static List<string> _files = new();
-	private static readonly string _inPath = $"{AppDomain.CurrentDomain.BaseDirectory}in";
-	private static readonly string _outPath = $"{AppDomain.CurrentDomain.BaseDirectory}out";
+	static List<string> _files = new();
+	static readonly string _inPath = $"{AppDomain.CurrentDomain.BaseDirectory}in";
+	static readonly string _outPath = $"{AppDomain.CurrentDomain.BaseDirectory}out";
 	static bool _started = false;
 	static bool _stopped = false;
+	static Icon _cursorIcon;
 
 	static public int FrameCount => _files.Count;
 
@@ -28,6 +29,8 @@ public static class ScreenRecorder
 		}
 
 		Directory.CreateDirectory(_inPath);
+
+		_cursorIcon = new Icon("cursor.ico");
 	}
 
 	public static void RecordScreen(int x, int y, int width, int height)
@@ -37,6 +40,10 @@ public static class ScreenRecorder
 		using var bitmap = new Bitmap(width, height);
 		using var g = Graphics.FromImage(bitmap);
 		g.CopyFromScreen(x, y, 0, 0, bitmap.Size, CopyPixelOperation.SourceCopy);
+		if (Constants.DrawCursor)
+		{
+			g.DrawIcon(_cursorIcon, Cursor.Position.X - x, Cursor.Position.Y - y);
+		}
 		var fileName = $"{_inPath}{Path.DirectorySeparatorChar}{_files.Count}.jpg";
 		bitmap.Save(fileName, ImageFormat.Jpeg);
 		_files.Add(fileName);

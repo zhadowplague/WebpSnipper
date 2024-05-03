@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Config.Net;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using Application = System.Windows.Application;
@@ -55,6 +56,8 @@ namespace WebpSnipper
 
 		private void OnClosed(object? sender, EventArgs e)
 		{
+			if (_saveTask != null)
+				ScreenRecorder.OpenOutputFolder();
 			Dispose();
 		}
 
@@ -72,6 +75,10 @@ namespace WebpSnipper
 			if (_saveTask != null)
 			{
 				await _saveTask;
+			}
+			else
+			{
+				System.Windows.Application.Current.Shutdown();
 			}
 			var resultWindow = new ResultWindow();
 			resultWindow.Show();
@@ -94,7 +101,7 @@ namespace WebpSnipper
 			var progress = 0.0;
 			var stopWatch = new Stopwatch();
 			stopWatch.Start();
-			const int msPerFrame = (int)((1.0 / Constants.DefaultFPS) * 1000);
+			int msPerFrame = (int)((1.0 / Constants.DefaultFPS) * 1000);
             await Dispatcher.InvokeAsync(new Action(() =>
             {
                 TaskbarItemInfo.ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal;

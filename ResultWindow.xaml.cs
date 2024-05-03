@@ -21,7 +21,6 @@ namespace WebpSnipper
 
 		private void OnWindowClose(object? sender, EventArgs e)
 		{
-			ScreenRecorder.OpenOutputFolder();
 			System.Windows.Application.Current.Shutdown();
 		}
 	}
